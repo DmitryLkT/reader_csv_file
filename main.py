@@ -1,1 +1,31 @@
+from reports.performance import generate
+from reports.save_file import save
+from utils.file_reader import reader
+from tabulate import tabulate
+import argparse
 
+columns = ['position', 'performance']
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument('--files',
+                        nargs='+',
+                        required=True,
+                        type=str,
+                        help='List of CSV files to process' )
+
+parser.add_argument('--report',
+                        required=True,
+                        type=str,
+                        help='The name of the report/file to save')
+
+args = parser.parse_args()
+
+read = reader(args.files, columns)
+rows = generate(read)
+
+
+table = tabulate(rows, headers=columns, tablefmt='simple', showindex=range(1, len(rows) + 1))
+
+save(args.report,rows)
+print(table)
