@@ -1,8 +1,7 @@
 import csv
 
-def reader(*files: str):
+def reader(files: list[str], columns: list[str]):
     data = []
-    columns = ['position', 'performance']
 
     for file_name in files:
         with open(file_name, 'r', encoding='utf-8') as f:
