@@ -4,28 +4,32 @@ from utils.file_reader import reader
 from tabulate import tabulate
 import argparse
 
-columns = ['position', 'performance']
+def main():
+    columns = ['position', 'performance']
 
-parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser()
 
-parser.add_argument('--files',
+    parser.add_argument('--files',
                         nargs='+',
                         required=True,
                         type=str,
-                        help='List of CSV files to process' )
+                        help='List of CSV files to process')
 
-parser.add_argument('--report',
+    parser.add_argument('--report',
                         required=True,
                         type=str,
                         help='The name of the report/file to save')
 
-args = parser.parse_args()
+    args = parser.parse_args()
 
-read = reader(args.files, columns)
-rows = generate(read)
+    read = reader(args.files, columns)
+    rows = generate(read)
 
-save(args.report, rows)
+    save(args.report, rows)
 
-table = tabulate(rows, headers='keys', tablefmt='simple', showindex=range(1, len(rows) + 1))
+    table = tabulate(rows, headers='keys', tablefmt='simple', showindex=range(1, len(rows) + 1))
 
-print(table)
+    print(table)
+
+if __name__ == '__main__':
+    main()
