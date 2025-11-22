@@ -14,7 +14,9 @@ def reader(files: list[str], columns: list[str]):
                 raise ValueError(f"{file_name} no column in the file: {e}")
 
             for row in csv_reader:
-                selected = [row[i] for i in ind]
+                selected = {}
+                for i in range(len(columns)):
+                    selected[columns[i]] = row[ind[i]]
                 data.append(selected)
 
     return data
