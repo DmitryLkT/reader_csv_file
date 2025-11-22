@@ -1,3 +1,20 @@
+def validate_data(func):
+    def wrapper(data: list[dict]):
+        if not data:
+            return []
+
+        if not data[0]:
+            raise ValueError("First element is empty")
+
+        keys = list(data[0].keys())
+
+        if len(keys) < 2:
+            raise ValueError("Need at least 2 keys")
+
+        return func(data)
+    return wrapper
+
+@validate_data
 def generate(data: list[dict]):
     sums = {}
     counts = {}
