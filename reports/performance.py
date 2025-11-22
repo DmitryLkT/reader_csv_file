@@ -1,23 +1,27 @@
-def generate(data):
+def generate(data: list[dict]):
     sums = {}
     counts = {}
+    keys = list(data[0].keys())
 
-    for position, performance in data:
-        performance = float(performance)
+    for row in data:
+        key = row[keys[0]]
+        value = float(row[keys[1]])
 
-        if position not in sums:
-            sums[position] = performance
-            counts[position] = 1
+        if key not in sums:
+            sums[key] = value
+            counts[key] = 1
         else:
-            sums[position] += performance
-            counts[position] += 1
+            sums[key] += value
+            counts[key] += 1
 
     result = []
 
-    for position in sums:
-        avg = sums[position] / counts[position]
-        result.append([position, round(avg, 2)])
+    for key in sums:
+        avg = round(sums[key] / counts[key], 2)
+        row = {keys[0]: key, keys[1]: avg}
 
-    result.sort(key=lambda x: x[1], reverse=True)
+        result.append(row)
+
+    result.sort(key=lambda x: x[keys[1]], reverse=True)
 
     return result

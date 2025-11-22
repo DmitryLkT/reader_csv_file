@@ -24,8 +24,8 @@ args = parser.parse_args()
 read = reader(args.files, columns)
 rows = generate(read)
 
+save(args.report, rows)
 
-table = tabulate(rows, headers=columns, tablefmt='simple', showindex=range(1, len(rows) + 1))
+table = tabulate(rows, headers='keys', tablefmt='simple', showindex=range(1, len(rows) + 1))
 
-save(args.report,rows)
 print(table)
