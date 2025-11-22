@@ -97,4 +97,3 @@ def test_zero_values():
     result = generate(data)
 
     assert result == expected
-    
