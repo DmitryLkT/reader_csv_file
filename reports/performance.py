@@ -22,7 +22,11 @@ def generate(data: list[dict]):
 
     for row in data:
         key = row[keys[0]]
-        value = float(row[keys[1]])
+
+        try:
+            value = float(row[keys[1]])
+        except (ValueError, TypeError):
+            raise ValueError(f"Value {row[keys[1]]} cannot be converted to float")
 
         if key not in sums:
             sums[key] = value
