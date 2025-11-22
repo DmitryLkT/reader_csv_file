@@ -8,10 +8,6 @@ def validate_data_save_file(func):
         if not rows[0]:
             raise ValueError("Empty dict")
 
-        if len(rows) > 2:
-            if rows[1].keys() != rows[2].keys():
-                raise ValueError("Keys do not match")
-
         return func(filename, rows)
     return wrapper
 
