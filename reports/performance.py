@@ -21,6 +21,9 @@ def generate(data: list[dict]):
     keys = list(data[0].keys())
 
     for row in data:
+        if keys[0] not in row or keys[1] not in row:
+            raise ValueError("Row missing required keys")
+
         key = row[keys[0]]
 
         try:
